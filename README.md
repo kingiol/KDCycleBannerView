@@ -3,7 +3,34 @@ KDCycleBannerView
 
 A Cycle Or Loop ScrollView For Banner
 
+![ScreenShoot](https://github.com/kingiol/KDCycleBannerView/raw/master/ScreenShoot.gif)
+
+## Installation with CocoaPods
+
+[CocoaPods](http://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries.
+
+### Podfile
+
+``` ruby
+platform :ios
+pod "KDCycleBannerView"
+```
+
 ## Usage
+
+It is quite easy to use, you can use this by two methods, one is for code, another is for IB.
+
+``` objc
+_cycleBannerViewBottom = [KDCycleBannerView new];
+_cycleBannerViewBottom.frame = CGRectMake(20, 270, 280, 150);
+_cycleBannerViewBottom.datasource = self;
+_cycleBannerViewBottom.delegate = self;
+_cycleBannerViewBottom.continuous = YES;
+_cycleBannerViewBottom.autoPlayTimeInterval = 5;
+[self.view addSubview:_cycleBannerViewBottom];
+```
+
+For more infomation, please check the demo project, Good Luck!
 
 
 ## Inspiration

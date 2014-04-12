@@ -38,8 +38,8 @@ typedef void(^CompleteBlock)(void);
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDataource> datasource;
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDelegate> delegate;
 
-@property (assign, nonatomic, getter = isContinuous) BOOL continuous;
-@property (assign, nonatomic) NSUInteger autoPlayTimeInterval;
+@property (assign, nonatomic, getter = isContinuous) BOOL continuous;   // if YES, then bannerview will show like a carousel, default is NO
+@property (assign, nonatomic) NSUInteger autoPlayTimeInterval;  // if autoPlayTimeInterval more than 0, the bannerView will autoplay with autoPlayTimeInterval value space, default is 0
 
 - (void)reloadDataWithCompleteBlock:(CompleteBlock)competeBlock;
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated;
