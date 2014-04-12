@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3FCFF7AB-2604-4223-8617-7DF59EB066AB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>KDCycleBannerViewDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BFDF68FE-27C9-4A07-BBA4-2196EBD5A815</key>
+		<string>https://github.com/kingiol/KDCycleBannerView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>KDCycleBannerViewDemo/KDCycleBannerViewDemo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BFDF68FE-27C9-4A07-BBA4-2196EBD5A815</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kingiol/KDCycleBannerView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BFDF68FE-27C9-4A07-BBA4-2196EBD5A815</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BFDF68FE-27C9-4A07-BBA4-2196EBD5A815</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KDCycleBannerView</string>
+		</dict>
+	</array>
+</dict>
+</plist>
