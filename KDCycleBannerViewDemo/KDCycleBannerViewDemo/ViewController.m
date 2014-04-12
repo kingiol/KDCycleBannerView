@@ -26,11 +26,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    _cycleBannerViewTop.autoPlayTimeInterval = 5;
+    
     _cycleBannerViewBottom = [KDCycleBannerView new];
     _cycleBannerViewBottom.frame = CGRectMake(20, 270, 280, 150);
     _cycleBannerViewBottom.datasource = self;
     _cycleBannerViewBottom.delegate = self;
     _cycleBannerViewBottom.continuous = YES;
+    _cycleBannerViewBottom.autoPlayTimeInterval = 5;
     [self.view addSubview:_cycleBannerViewBottom];
 }
 

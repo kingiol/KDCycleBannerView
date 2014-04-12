@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIPageControl *pageControl;
 
 @property (strong, nonatomic) NSArray *datasourceImages;
+@property (assign, nonatomic) NSUInteger currentSelectedPage;
 
 @property (strong, nonatomic) CompleteBlock completeBlock;
 
@@ -50,7 +51,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"layoutSubviews:%@", NSStringFromCGRect(self.frame));
+
     NSArray *subViews = self.subviews;
     [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -68,6 +69,13 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     [self initializePageControl];
     
     [self loadData];
+    
+    // progress autoPlayTimeInterval
+    if (self.autoPlayTimeInterval > 0) {
+        if ((self.isContinuous && _datasourceImages.count > 3) || (!self.isContinuous &&_datasourceImages.count > 1)) {
+            [self performSelector:@selector(autoSwitchBannerView) withObject:nil afterDelay:self.autoPlayTimeInterval];
+        }
+    }
 }
 
 - (void)initializeScrollView {
@@ -173,19 +181,45 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated {
     NSInteger page = MIN(_datasourceImages.count - 1, MAX(0, currentPage));
     
+    [self setSwitchPage:page animated:animated withUserInterface:YES];
+}
+
+- (void)setSwitchPage:(NSInteger)switchPage animated:(BOOL)animated withUserInterface:(BOOL)userInterface {
+    
+    NSInteger page = -1;
+    
+    if (userInterface) {
+        page = switchPage;
+    }else {
+        _currentSelectedPage++;
+        page = _currentSelectedPage % (self.isContinuous ? (_datasourceImages.count - 1) : _datasourceImages.count);
+    }
+    
     if (self.isContinuous) {
         if (_datasourceImages.count > 1) {
             if (page >= (_datasourceImages.count -2)) {
-                page = _datasourceImages.count -3;
+                page = _datasourceImages.count - 3;
+                _currentSelectedPage = 0;
+                [self moveToTargetPosition:CGRectGetWidth(_scrollView.frame) * (page + 2) withAnimated:animated];
+            }else {
+                [self moveToTargetPosition:CGRectGetWidth(_scrollView.frame) * (page + 1) withAnimated:animated];
             }
-            [self moveToTargetPosition:CGRectGetWidth(_scrollView.frame) * (page + 1) withAnimated:animated];
         }else {
             [self moveToTargetPosition:0 withAnimated:animated];
         }
     }else {
         [self moveToTargetPosition:CGRectGetWidth(_scrollView.frame) * page withAnimated:animated];
     }
+    
     [self scrollViewDidScroll:_scrollView];
+}
+
+- (void)autoSwitchBannerView {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoSwitchBannerView) object:nil];
+    
+    [self setSwitchPage:-1 animated:YES withUserInterface:NO];
+    
+    [self performSelector:_cmd withObject:nil afterDelay:self.autoPlayTimeInterval];
 }
 
 #pragma mark - KVO
@@ -226,6 +260,8 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
             page = _pageControl.numberOfPages - 1;
         }
     }
+    
+    _currentSelectedPage = page;
     
     if (page != _pageControl.currentPage) {
         if ([self.delegate respondsToSelector:@selector(cycleBannerView:didScrollToIndex:)]) {

@@ -39,6 +39,7 @@ typedef void(^CompleteBlock)(void);
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDelegate> delegate;
 
 @property (assign, nonatomic, getter = isContinuous) BOOL continuous;
+@property (assign, nonatomic) NSUInteger autoPlayTimeInterval;
 
 - (void)reloadDataWithCompleteBlock:(CompleteBlock)competeBlock;
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated;
