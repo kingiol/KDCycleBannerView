@@ -85,6 +85,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.autoresizingMask = self.autoresizingMask;
+    _scrollView.scrollsToTop = NO;
     [self addSubview:_scrollView];
 }
 
