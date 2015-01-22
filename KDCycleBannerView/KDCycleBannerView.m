@@ -149,9 +149,9 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
             if ([self.datasource respondsToSelector:@selector(placeHolderImageOfBannerView:atIndex:)]) {
                 UIImage *placeHolderImage = [self.datasource placeHolderImageOfBannerView:self atIndex:i];
                 NSAssert(placeHolderImage != nil, @"placeHolderImage must not be nil");
-                [imageView setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource placeholderImage:placeHolderImage];
+                [imageView sd_setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource placeholderImage:placeHolderImage];
             }else {
-                [imageView setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource];
+                [imageView sd_setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource];
             }
             
         }
