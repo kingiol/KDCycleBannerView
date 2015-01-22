@@ -1,6 +1,11 @@
 KDCycleBannerView
 =================
 
+[![Pod Version](http://img.shields.io/cocoapods/v/KDCycleBannerView.svg)](http://blog.kingiol.com)
+[![Pod Version](http://img.shields.io/cocoapods/p/KDCycleBannerView.svg)](http://blog.kingiol.com)
+[![License](http://img.shields.io/cocoapods/l/KDCycleBannerView.svg)](http://blog.kingiol.com)
+
+
 A Cycle Or Loop ScrollView For Banner
 
 ![ScreenShoot](https://github.com/kingiol/KDCycleBannerView/raw/master/ScreenShoot.gif)
