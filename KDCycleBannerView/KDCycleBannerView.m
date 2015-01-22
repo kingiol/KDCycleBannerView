@@ -85,6 +85,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.autoresizingMask = self.autoresizingMask;
+    _scrollView.scrollsToTop = NO;
     [self addSubview:_scrollView];
 }
 
@@ -270,6 +271,16 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     }
     
     _pageControl.currentPage = page;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoSwitchBannerView) object:nil];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self performSelector:@selector(autoSwitchBannerView) withObject:nil afterDelay:self.autoPlayTimeInterval];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
