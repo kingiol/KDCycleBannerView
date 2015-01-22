@@ -7,11 +7,13 @@ Pod::Spec.new do |s|
   s.summary      = 'A Cycle Or Loop ScrollView For Banner'
 
 # Source Info
-  s.platform     =  :ios, '6.0'
+  s.ios.deployment_target = '6.0'
   s.source       = { :git => 'https://github.com/kingiol/KDCycleBannerView.git', :tag => '1.1' }
   s.source_files = 'KDCycleBannerView/*{h,m}'
 
   s.requires_arc = true
+
+  s.public_header_files = 'KDCycleBannerView/*.h'
   
 # Pod Dependencies
   s.dependency 'SDWebImage'
