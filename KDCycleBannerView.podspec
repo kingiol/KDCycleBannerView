@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'KDCycleBannerView'
-  s.version      = '1.1'
+  s.version      = '1.1.1'
   s.license      = 'MIT'
   s.homepage     = 'https://github.com/kingiol/KDCycleBannerView'
   s.authors      = { 'Kingiol' => 'kingxiaokang@gmail.com' }
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
 # Source Info
   s.ios.deployment_target = '6.0'
-  s.source       = { :git => 'https://github.com/kingiol/KDCycleBannerView.git', :tag => '1.1' }
+  s.source       = { :git => 'https://github.com/kingiol/KDCycleBannerView.git', :tag => '1.1.1' }
   s.source_files = 'KDCycleBannerView/*{h,m}'
 
   s.requires_arc = true
