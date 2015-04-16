@@ -12,7 +12,7 @@
 
 typedef void(^CompleteBlock)(void);
 
-@protocol KDCycleBannerViewDataource <NSObject>
+@protocol KDCycleBannerViewDataSource <NSObject>
 
 @required
 - (NSArray *)numberOfKDCycleBannerView:(KDCycleBannerView *)bannerView;
@@ -35,7 +35,7 @@ typedef void(^CompleteBlock)(void);
 @interface KDCycleBannerView : UIView
 
 // Delegate and Datasource
-@property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDataource> datasource;
+@property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDataSource> datasource;
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDelegate> delegate;
 
 @property (assign, nonatomic, getter = isContinuous) BOOL continuous;   // if YES, then bannerview will show like a carousel, default is NO
