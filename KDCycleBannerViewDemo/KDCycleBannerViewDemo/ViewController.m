@@ -10,7 +10,7 @@
 
 #import "KDCycleBannerView.h"
 
-@interface ViewController () <KDCycleBannerViewDataource, KDCycleBannerViewDelegate, UITextFieldDelegate>
+@interface ViewController () <KDCycleBannerViewDataSource, KDCycleBannerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet KDCycleBannerView *cycleBannerViewTop;
 @property (strong, nonatomic) KDCycleBannerView *cycleBannerViewBottom;
@@ -43,7 +43,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - KDCycleBannerViewDataource
+#pragma mark - KDCycleBannerViewDataSource
 
 - (NSArray *)numberOfKDCycleBannerView:(KDCycleBannerView *)bannerView {
     
