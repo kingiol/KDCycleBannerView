@@ -54,9 +54,6 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    NSArray *subViews = self.subviews;
-    [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
     [self initialize];
     
     if (self.completeBlock) {
@@ -81,6 +78,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 }
 
 - (void)initializeScrollView {
+    [_scrollView removeFromSuperview];
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
@@ -92,6 +90,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 }
 
 - (void)initializePageControl {
+    [_pageControl removeFromSuperview];
     CGRect pageControlFrame = CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), 30);
     _pageControl = [[UIPageControl alloc] initWithFrame:pageControlFrame];
     _pageControl.center = CGPointMake(CGRectGetWidth(_scrollView.frame)*0.5, CGRectGetHeight(_scrollView.frame) - 12.);
