@@ -32,26 +32,28 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        _scrollViewBounces = YES;
+        [self init_common];
     }
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        _scrollViewBounces = YES;
+        [self init_common];
     }
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (void)init_common {
+    _scrollViewBounces = YES;
+    _activityIndicatorStyle = UIActivityIndicatorViewStyleWhiteLarge;
 }
+
+// MARK: - Override
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     NSArray *subViews = self.subviews;
     [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -99,10 +101,9 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 
 - (void)loadData {
     NSAssert(_datasource != nil, @"datasource must not nil");
-    _datasourceImages = [_datasource numberOfKDCycleBannerView:self];
+    _datasourceImages = [_datasource dataForCycleBannerView:self];
     
     if (_datasourceImages.count == 0) {
-        //显示默认页，无数据页面
         if ([self.datasource respondsToSelector:@selector(placeHolderImageOfZeroBannerView)]) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame))];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -137,20 +138,16 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
         id imageSource = [_datasourceImages objectAtIndex:i];
         if ([imageSource isKindOfClass:[UIImage class]]) {
             imageView.image = imageSource;
-        }else if ([imageSource isKindOfClass:[NSString class]] || [imageSource isKindOfClass:[NSURL class]]) {
-            UIActivityIndicatorView *activityIndicatorView = [UIActivityIndicatorView new];
-            activityIndicatorView.center = CGPointMake(CGRectGetWidth(_scrollView.frame) * 0.5, CGRectGetHeight(_scrollView.frame) * 0.5);
-            activityIndicatorView.tag = 100;
-            activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-            [activityIndicatorView startAnimating];
-            [imageView addSubview:activityIndicatorView];
-            [imageView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:kContentImageViewObservationContext];
+        } else if ([imageSource isKindOfClass:[NSString class]] || [imageSource isKindOfClass:[NSURL class]]) {
+            [imageView setShowActivityIndicatorView:self.showActivityIndicatorViewWhenDownloadingImages];
+            [imageView setIndicatorStyle:self.activityIndicatorStyle];
             
             if ([self.datasource respondsToSelector:@selector(placeHolderImageOfBannerView:atIndex:)]) {
                 UIImage *placeHolderImage = [self.datasource placeHolderImageOfBannerView:self atIndex:i];
                 NSAssert(placeHolderImage != nil, @"placeHolderImage must not be nil");
                 [imageView sd_setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource placeholderImage:placeHolderImage];
-            }else {
+                
+            } else {
                 [imageView sd_setImageWithURL:[imageSource isKindOfClass:[NSString class]] ? [NSURL URLWithString:imageSource] : imageSource];
             }
             
@@ -221,17 +218,6 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     [self setSwitchPage:-1 animated:YES withUserInterface:NO];
     
     [self performSelector:_cmd withObject:nil afterDelay:self.autoPlayTimeInterval];
-}
-
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == kContentImageViewObservationContext) {
-        UIImageView *imageView = (UIImageView *)object;
-        UIActivityIndicatorView *activityIndicatorView = (UIActivityIndicatorView *)[imageView viewWithTag:100];
-        [activityIndicatorView removeFromSuperview];
-        [imageView removeObserver:self forKeyPath:@"image"];
-    }
 }
 
 #pragma mark - UIScrollViewDelegate

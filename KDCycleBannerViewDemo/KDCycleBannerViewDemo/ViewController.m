@@ -45,7 +45,7 @@
 
 #pragma mark - KDCycleBannerViewDataSource
 
-- (NSArray *)numberOfKDCycleBannerView:(KDCycleBannerView *)bannerView {
+- (NSArray *)dataForCycleBannerView:(KDCycleBannerView *)bannerView {
     
     return @[[UIImage imageNamed:@"image1"],
              @"http://d.hiphotos.baidu.com/image/w%3D2048/sign=ed59838948ed2e73fce9812cb339a08b/58ee3d6d55fbb2fb9835341f4d4a20a44623dca5.jpg",
