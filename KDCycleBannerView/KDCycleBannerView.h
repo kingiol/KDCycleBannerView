@@ -15,7 +15,11 @@ typedef void(^CompleteBlock)(void);
 @protocol KDCycleBannerViewDataSource <NSObject>
 
 @required
-- (NSArray *)numberOfKDCycleBannerView:(KDCycleBannerView *)bannerView;
+/**
+ @return Array of UIImage or NSString or NSURL objects with direct image data objects or URLs to images.
+ Heterogeneous array is also allowed, that is with different types of items.
+ */
+- (NSArray *)dataForCycleBannerView:(KDCycleBannerView *)bannerView;
 - (UIViewContentMode)contentModeForImageIndex:(NSUInteger)index;
 
 @optional
@@ -37,6 +41,19 @@ typedef void(^CompleteBlock)(void);
 // Delegate and Datasource
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDataSource> datasource;
 @property (weak, nonatomic) IBOutlet id<KDCycleBannerViewDelegate> delegate;
+
+/**
+ Show activity UIActivityIndicatorView. Default `NO`.
+ */
+@property (assign, nonatomic) BOOL showActivityIndicatorViewWhenDownloadingImages;
+
+/**
+ *  set desired UIActivityIndicatorViewStyle
+ *
+ *  @param style The style of the UIActivityIndicatorView
+ Default value `UIActivityIndicatorViewStyleWhiteLarge`.
+ */
+@property (assign, nonatomic) UIActivityIndicatorViewStyle activityIndicatorStyle;
 
 @property (assign, nonatomic, getter = isContinuous) BOOL continuous;   // if YES, then bannerview will show like a carousel, default is NO
 @property (assign, nonatomic) NSUInteger autoPlayTimeInterval;  // if autoPlayTimeInterval more than 0, the bannerView will autoplay with autoPlayTimeInterval value space, default is 0
